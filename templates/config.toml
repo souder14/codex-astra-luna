@@ -1,0 +1,34 @@
+model = "gpt-6-astra"
+model_reasoning_effort = "medium"
+
+[agents]
+enabled = true
+default_subagent_model = "gpt-6-luna"
+default_subagent_reasoning_effort = "high"
+
+[features.multi_agent_v2]
+enabled = true
+max_concurrent_threads_per_session = 6
+min_wait_timeout_ms = 300000
+default_wait_timeout_ms = 600000
+max_wait_timeout_ms = 3600000
+wait_agent_enabled = true
+expose_spawn_agent_model_overrides = true
+root_agent_usage_hint_text = """
+Use GPT-6 Luna at high reasoning for bounded delegated execution.
+For cross-model workers explicitly use fork_turns="none".
+Do not repeatedly poll healthy workers; prefer one long wait_agent call.
+Use no more than six workers, fewer when appropriate and within live capacity.
+Give workers self-contained task packets instead of parent history.
+Do not duplicate healthy or already-assigned work.
+"""
+subagent_developer_instructions = """
+You are a bounded execution worker. Complete the assigned task within scope.
+Do not spawn additional agents unless explicitly instructed.
+Preserve unrelated changes. Run appropriate verification.
+Report Result; Files changed; Tests/verification; Important decisions;
+Remaining risks/blockers. Keep reports concise; do not return large raw logs.
+"""
+
+[features.context_management]
+experimental_mode = false

@@ -1,0 +1,4 @@
+interface:
+  display_name: "Astra + Luna"
+  short_description: "Efficient orchestration with fresh Luna High workers"
+  default_prompt: "Use $astra-luna to complete this task with efficient delegation to fresh Luna High workers."

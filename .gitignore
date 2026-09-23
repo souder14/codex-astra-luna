@@ -1,0 +1,15 @@
+.venv/
+__pycache__/
+*.pyc
+.pytest_cache/
+backups/
+evidence/
+*.jsonl
+*.sqlite*
+sessions/
+/config.toml
+/AGENTS.override.md
+auth.json
+.env
+.env.*
+!.env.example
