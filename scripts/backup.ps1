@@ -23,7 +23,7 @@ $acl = New-Object System.Security.AccessControl.DirectorySecurity
 $acl.SetAccessRuleProtection($true,$false)
 $sid = [System.Security.Principal.WindowsIdentity]::GetCurrent().User
 $acl.AddAccessRule((New-Object System.Security.AccessControl.FileSystemAccessRule($sid,'FullControl','ContainerInherit,ObjectInherit','None','Allow')))
-Set-Acl -LiteralPath $backup -AclObject $acl
+(New-Object System.IO.DirectoryInfo($backup)).SetAccessControl($acl)
 if (-not (Get-Acl $backup).AreAccessRulesProtected) { throw 'Backup ACL protection failed.' }
 $names = @('config.toml','AGENTS.md','AGENTS.override.md','agents/luna-worker.toml','skills/astra-luna/SKILL.md','skills/astra-luna/agents/openai.yaml')
 $entries = @()
